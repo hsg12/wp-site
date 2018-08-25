@@ -28,8 +28,17 @@ function sunset_add_admin_page() {
     'Sunset Theme Options',     // page_title
     'Theme Options',            // menu_title
     'manage_options',           // capability
-    'sunset-theme-slug',      // menu_slug
+    'sunset-theme-slug',        // menu_slug
     'sunset_theme_support_page' // function
+  );
+
+  add_submenu_page(
+    'sunset-slug',               // parent_slug
+    'Sunset Contact Form',       // page_title
+    'Contact Form',              // menu_title
+    'manage_options',            // capability
+    'sunset-theme-contact-slug', // menu_slug
+    'sunset_contact_form_page'   // function
   );
 
   // Activate custom settings
@@ -45,6 +54,10 @@ function sunset_theme_create_page() {
 
 function sunset_theme_support_page() {
   require_once( get_template_directory() . '/inc/templates/sunset-theme-support.php');
+}
+
+function sunset_contact_form_page() {
+  require_once( get_template_directory() . '/inc/templates/sunset-contact-form.php');
 }
 
 function sunset_custom_settings() {
@@ -77,6 +90,15 @@ function sunset_custom_settings() {
   add_settings_field( 'post-formats', 'Post Formats', 'sunset_post_formats', 'sunset-theme-slug', 'sunset-theme-options' );
   add_settings_field( 'custom-header', 'Custom header', 'sunset_custom_header', 'sunset-theme-slug', 'sunset-theme-options' );
   add_settings_field( 'custom-background', 'Custom background', 'sunset_custom_background', 'sunset-theme-slug', 'sunset-theme-options' );
+
+  // Contact Form Options
+
+  register_setting( 'sunset-contact-options', 'activate_contact_form' );
+
+  add_settings_section( 'sunset-contact-section', 'Contact Form', 'sunset_contact_section', 'sunset-theme-contact-slug' );
+
+  add_settings_field( 'activate-form', 'Activate Contact Form', 'sunset_activate_contact', 'sunset-theme-contact-slug', 'sunset-contact-section' );
+
 }
 
 // Sidebar Options Functions
@@ -188,6 +210,26 @@ function sunset_custom_background() {
   }
 
   echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" ' . $checked . '>Activate the Custom Background</label>';
+}
+
+
+
+// Contact Form Options Functions
+
+function sunset_contact_section() {
+  echo "Activate and Deactivate the built-in Contact Form";
+}
+
+function sunset_activate_contact() {
+  $activateContactForm = get_option( 'activate_contact_form' );
+
+  if (isset($activateContactForm) && $activateContactForm == 1) {
+    $checked = 'checked';
+  } else {
+    $checked = '';
+  }
+
+  echo '<label><input type="checkbox" id="activate_contact_form" name="activate_contact_form" value="1" ' . $checked . '></label>';
 }
 
 
