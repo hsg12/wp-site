@@ -7,6 +7,11 @@ if (isset($activateContactForm) && $activateContactForm == 1) {
 
   add_filter( 'manage_sunset-contact_posts_columns', 'sunset_set_contact_columns' );
   add_action( 'manage_sunset-contact_posts_custom_column', 'sunset_contact_custom_column', 10, 2 );
+
+  // Activating meta box
+  add_action( 'add_meta_boxes', 'sunset_contact_add_meta_box' );
+  // Saving meta box value to database
+  add_action( 'save_post', 'sunset_save_contact_email_data' );
 }
 
 function sunset_contact_custom_post_type() {
@@ -49,7 +54,78 @@ function sunset_contact_custom_column( $column, $post_id ) {
       break;
 
     case 'email':
-      echo 'Message information';
+      $email = esc_attr( get_post_meta( $post_id, '_contact_email_value_key', true ) );
+      echo '<a href="mailto:' . $email . '">' . $email . '</a>';
       break;
   }
 }
+
+
+
+/* Contact meta boxes  */
+
+function sunset_contact_add_meta_box() {
+  add_meta_box( 
+    'contact_email',                 // id, 
+    'User Email',                    // title, 
+    'sunset_contact_email_callback', // callback, 
+    'sunset-contact',                // custom post type name
+    'side',                          // $context = 'advanced'
+    'default'                        // $priority = 'default'
+  );
+}
+
+function sunset_contact_email_callback( $post ) {
+  wp_nonce_field( 
+    'sunset_save_contact_email_data',     // action
+    'sunset_contact_email_meta_box_nonce' // $name = '_wpnonce'
+  );
+
+  $value = esc_attr( get_post_meta( 
+    $post->ID,                  // $post_id
+    '_contact_email_value_key', // $key = '', 
+    true                        // $single = false 
+  ) );
+
+  echo '<label for="sunset_contact_email_field">User Email Address: </label>';
+  echo '<input type="email" id="sunset_contact_email_field" name="sunset_contact_email_field" value="' . $value . '" size="25">';
+}
+
+function sunset_save_contact_email_data( $post_id ) {
+  if ( ! isset($_POST['sunset_contact_email_meta_box_nonce']) ) {
+    return;
+  }
+
+  if ( ! wp_verify_nonce( $_POST['sunset_contact_email_meta_box_nonce'], 'sunset_save_contact_email_data' ) ) {
+    return;
+  }
+
+  // For preventing auto saving in update time( if we want )
+  if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+    return;
+  }
+
+  if ( ! current_user_can( 'edit_post', $post_id ) ) {
+    return;
+  }
+
+  if ( ! isset($_POST['sunset_contact_email_field']) ) {
+    return;
+  }
+
+  $my_data = sanitize_text_field( $_POST['sunset_contact_email_field'] );
+  update_post_meta( 
+    $post_id, 
+    '_contact_email_value_key', // $meta_key, 
+    $my_data                    // $meta_value, 
+  );
+}
+
+
+
+
+
+
+
+
+
