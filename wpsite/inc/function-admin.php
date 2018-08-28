@@ -41,6 +41,15 @@ function sunset_add_admin_page() {
     'sunset_contact_form_page'   // function
   );
 
+  add_submenu_page(
+    'sunset-slug',             // parent_slug
+    'Sunset Custom CSS',       // page_title
+    'Custom CSS',              // menu_title
+    'manage_options',          // capability
+    'sunset-theme-custom-css', // menu_slug
+    'sunset_custom_css_page'   // function
+  );
+
   // Activate custom settings
 
   add_action( 'admin_init', 'sunset_custom_settings' );
@@ -58,6 +67,10 @@ function sunset_theme_support_page() {
 
 function sunset_contact_form_page() {
   require_once( get_template_directory() . '/inc/templates/sunset-contact-form.php');
+}
+
+function sunset_custom_css_page() {
+  require_once( get_template_directory() . '/inc/templates/sunset-custom-css.php');
 }
 
 function sunset_custom_settings() {
@@ -99,6 +112,13 @@ function sunset_custom_settings() {
 
   add_settings_field( 'activate-form', 'Activate Contact Form', 'sunset_activate_contact', 'sunset-theme-contact-slug', 'sunset-contact-section' );
 
+  // Custom CSS Options
+
+  register_setting( 'sunset-custom-css-options', 'sunset_css', 'sunset_sanitize_custom_css' );
+
+  add_settings_section( 'sunset-custom-css-section', 'Custom CSS', 'sunset_custom_css_section_callback', 'sunset-theme-custom-css' );
+
+  add_settings_field( 'custom-css', 'Insert your Custom CSS', 'sunset_custom_css_callback', 'sunset-theme-custom-css', 'sunset-custom-css-section' );
 }
 
 // Sidebar Options Functions
@@ -234,6 +254,22 @@ function sunset_activate_contact() {
 
 
 
+// Custom CSS Options Functions
+
+function sunset_custom_css_section_callback() {
+  echo "Customize Sunset Theme with your own CSS";
+}
+
+function sunset_custom_css_callback() {
+  $css = get_option( 'sunset_css' );
+  $css = empty($css) ? '/* Sunset Theme Custom CSS */' : $css;
+
+  // ace code editor from https://github.com/ajaxorg/ace-builds ( src-min folder )
+  echo '<div id="customCss">' . $css . '</div><textarea id="sunset_css" name="sunset_css" style="display: none; visibility: hidden;">' . $css . '</textarea>'; 
+}
+
+
+
 
 
 
@@ -242,5 +278,10 @@ function sunset_activate_contact() {
 function sunset_sanitize_form_data( $input ) {
   $output = sanitize_text_field( $input );
   $output = str_replace( '@', '', $output );
+  return $output;
+}
+
+function sunset_sanitize_custom_css( $input ) {
+  $output = esc_textarea( $input );
   return $output;
 }

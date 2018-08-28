@@ -116,8 +116,8 @@ function sunset_save_contact_email_data( $post_id ) {
   $my_data = sanitize_text_field( $_POST['sunset_contact_email_field'] );
   update_post_meta( 
     $post_id, 
-    '_contact_email_value_key', // $meta_key, 
-    $my_data                    // $meta_value, 
+    '_contact_email_value_key', // $meta_key
+    $my_data                    // $meta_value
   );
 }
 

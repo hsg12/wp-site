@@ -1,18 +1,28 @@
 <?php
 
 function sunset_load_admin_scripts( $page ) {
-  if ( $page !== 'toplevel_page_sunset-slug' ) {
+  // echo $page;
+
+  if ( $page === 'toplevel_page_sunset-slug' ) {
+    wp_register_style( 'sunset_admin', get_template_directory_uri() . '/css/sunset.admin.css', array(), '1.0.0' );
+    wp_enqueue_style( 'sunset_admin' );
+
+    wp_enqueue_media();
+
+    wp_register_script( 'sunset-admin-script', get_template_directory_uri() . '/js/sunset.admin.js', array('jquery'), null, true );
+    wp_enqueue_script( 'sunset-admin-script' );
+  } elseif ( $page === 'sunset_page_sunset-theme-custom-css' ) {
+    wp_register_style( 'ace', get_template_directory_uri() . '/css/sunset.ace.css', array(), '1.0.0' );
+    wp_enqueue_style( 'ace' );
+
+    wp_register_script( 'ace', get_template_directory_uri() . '/js/ace/ace.js', array(), '1.4.1', true );
+    wp_register_script( 'sunset-custom-css-script', get_template_directory_uri() . '/js/sunset.custom-css.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'ace' );
+    wp_enqueue_script( 'sunset-custom-css-script' );
+  } else {
     return;
   }
   
-  wp_register_style( 'sunset_admin', get_template_directory_uri() . '/css/sunset.admin.css', array(), '1.0.0' );
-  wp_enqueue_style( 'sunset_admin' );
-
-  wp_enqueue_media();
-
-  wp_register_script( 'sunset-admin-script', get_template_directory_uri() . '/js/sunset.admin.js', array('jquery'), null, true );
-  wp_enqueue_script( 'jquery' );
-  wp_enqueue_script( 'sunset-admin-script' );
 }
 
 add_action( 'admin_enqueue_scripts', 'sunset_load_admin_scripts' );
