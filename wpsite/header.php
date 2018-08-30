@@ -20,4 +20,23 @@
   </head>
   
   <body <?php body_class(); ?>>
-    
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+        <div class="col-12">
+          <div class="header-container background-image text-center" style="background-image: url(<?php header_image(); ?>);">
+            <div class="header-content app-table">
+              <div class="app-table-cell">
+                <h1 class="site-title">
+                  <span class="sunset-logo sunset-icon"></span>
+                  <span class="d-none"><?php bloginfo( 'name' ); ?></span>
+                </h1>
+                <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+              </div><!-- table-cell -->
+            </div><!-- header-content -->
+            <div class="nav-container">
+              
+            </div><!-- nav-container -->
+          </div><!-- header-container -->
+        </div><!-- .col-xs-12 -->
+      </div><!-- .row -->
+    </div><!-- .container-fluid -->
