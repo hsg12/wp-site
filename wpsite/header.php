@@ -25,7 +25,7 @@
     <div class="container-fluid p-0">
       <div class="row no-gutters">
         <div class="col-12">
-          <div class="header-container background-image text-center" style="background-image: url(<?php header_image(); ?>);">
+          <header class="header-container background-image text-center" style="background-image: url(<?php header_image(); ?>);">
             <div class="header-content app-table">
               <div class="app-table-cell">
                 <h1 class="site-title">
@@ -36,9 +36,21 @@
               </div><!-- table-cell -->
             </div><!-- header-content -->
             <div class="nav-container">
-              
+              <nav class="navbar navbar-expand-lg navbar-sunset">
+                <div class="container">                
+                  <?php 
+                    wp_nav_menu( array(
+                      'theme_location'  => 'primary',
+                      'container'       => false,
+                      'container_class' => false,
+                      'menu_class'      => 'navbar-nav mr-auto',
+                      'walker'          => new Bootstrap_NavWalker,
+                    ) ); 
+                  ?>
+                </div>
+              </nav>
             </div><!-- nav-container -->
-          </div><!-- header-container -->
+          </header><!-- header-container -->
         </div><!-- .col-xs-12 -->
       </div><!-- .row -->
     </div><!-- .container-fluid -->

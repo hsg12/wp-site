@@ -2,6 +2,26 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 /* 
+  Mixins
+*/
+
+@mixin animate ($attr, $time) {
+  -webkit-transition: $attr $time;
+  -moz-transition: $attr $time;
+  -ms-transition: $attr $time;
+  -o-transition: $attr $time;
+  transition: $attr $time;
+}
+
+@mixin transform ($val) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  -o-transform: $val;
+  transform: $val;
+}
+
+/* 
   Font Icon 
 */
 
@@ -53,12 +73,11 @@ body {
 }
 
 /* Header */
-
 .header-container {
   position: relative;
   display: block;
   height: 326px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .site-title {
@@ -72,3 +91,107 @@ body {
   font-size: 14px;
   margin-top: 0.2em;
 }
+
+.nav-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color:rgba(255, 255, 255, 0.1);
+}
+
+.navbar-sunset {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  ul {
+    margin: 0 auto;
+  }
+
+  ul li {
+    margin: 0 16px;
+
+    &.active {
+      a {
+        opacity: 1;
+        &:after {
+          opacity: 1;
+          @include transform(translateY(0px));
+        }
+
+        &:before {
+          opacity: 1;
+          @include transform(translateY(0px));
+        }
+      }
+    }
+
+    &.dropdown {
+      div.dropdown-menu a{
+        opacity: 1;
+        color: #555;
+
+        &:hover {
+          background-color: #369;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  ul li a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0.7;
+    @include animate(opacity, 320ms);
+    position: relative;
+
+    &:hover,
+    &:focus,
+    &:visited {
+      opacity: 1;
+
+      &:after {
+        opacity: 1;
+        @include transform(translateY(0px));
+      }
+
+      &:before {
+        opacity: 1;
+        @include transform(translateY(0px));
+      }
+    }
+  }
+}
+
+.link-after:after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background-color: #fff;
+  bottom: 7px;
+  left: 8px;
+  right: 8px;
+  display: block;
+  opacity: 0;
+  @include animate(all, 320ms);
+  @include transform(translateY(8px));
+}
+
+/* This class for bootstrap dropdown if we want to use it */
+.link-before:before {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background-color: #fff;
+  bottom: 7px;
+  left: 8px;
+  right: 8px;
+  display: block;
+  opacity: 0;
+  @include animate(all, 320ms);
+  @include transform(translateY(8px));
+}
+
+
+
