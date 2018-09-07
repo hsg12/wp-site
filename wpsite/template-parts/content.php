@@ -7,8 +7,9 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-  <header class="entry-header">
-    <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+
+  <header class="entry-header text-center">
+    <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
     <div class="entry-meta">
       <?php echo sunset_posted_meta(); ?>
     </div>
@@ -16,19 +17,22 @@
 
   <div class="entry-content">
     <?php if ( has_post_thumbnail() ) : ?>
-      <div class="standard-featured">
-        <?php the_post_thumbnail( 'full', ['class' => 'img-fluid', 'title' => 'Feature image', 'alt' => 'post thumbnail'] ); ?>
-      </div>
+      <?php $featured_image = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() )) ?>
+
+      <a href="<?php the_permalink(); ?>" class="standard-featured-link">
+        <div class="standard-featured" style="background-image: url(<?php echo $featured_image; ?>);"></div>
+      </a>
     <?php endif; ?>
     <div class="entry-excert">
       <?php the_excerpt(); ?>
     </div>
-    <div class="button-container">
-      <a href="<?php the_permalink(); ?>" class="btn btn-outline-secondary"><?php _e( 'Read More' ); ?></a>
+    <div class="button-container text-center">
+      <a href="<?php the_permalink(); ?>" class="btn-sunset"><?php _e( 'Read More' ); ?></a>
     </div>
   </div><!-- .entry-content -->
   
   <footer class="entry-footer">
     <?php echo sunset_posted_footer(); ?>
   </footer>
+
 </article>

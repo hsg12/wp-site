@@ -73,13 +73,13 @@ function sunset_posted_footer() {
     } elseif ( $comments_num > 1 ) {
       $comments = $comments_num . __( ' Comments' );
     } else {
-      $comments = $comments_num . __( '1 Comment' );
+      $comments = $comments_num . __( ' Comment' );
     }
 
-    if ( $comments_num > 1 ) {
-      $comments = '<a href="' . get_comments_link() . '">' . $comments . ' <span class="sunset-icon sunset-comment"></span></a>';
+    if ( $comments_num >= 1 ) {
+      $comments = '<a href="' . get_comments_link() . '">' . $comments . '</a> <span class="sunset-icon sunset-comment"></span>';
     } else {
-      $comments .= ' <span class="sunset-icon sunset-comment"></span>';
+      $comments = '<span class="comment-text">' . $comments . '</span><span class="sunset-icon sunset-comment"></span>';
     }
     
   } else {
@@ -90,10 +90,10 @@ function sunset_posted_footer() {
   $output .= '<div class="row">';
 
   $output .= '<div class="col-12 col-sm-6">';
-  $output .= get_the_tag_list( '<div class="tags-list"><span class="sunset-icon sunset-tag"></span>', ' ', '</div>' );
+  $output .= get_the_tag_list( '<div class="tags-list"><span class="sunset-icon sunset-tag"></span><span class="tags-box">', ' ', '</span></div>' );
   $output .= '</div>';
 
-  $output .= '<div class="col-12 col-sm-6">';
+  $output .= '<div class="col-12 col-sm-6 text-right comments-box">';
   $output .= $comments;
   $output .= '</div>';
 

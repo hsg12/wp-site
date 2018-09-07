@@ -29,25 +29,25 @@
             <div class="header-content app-table">
               <div class="app-table-cell">
                 <h1 class="site-title">
+                  <a href="<?php bloginfo( 'url' ); ?>" class="logo-link">
                   <span class="sunset-logo sunset-icon"></span>
                   <span class="d-none"><?php bloginfo( 'name' ); ?></span>
+                  </a>
                 </h1>
                 <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
               </div><!-- table-cell -->
             </div><!-- header-content -->
             <div class="nav-container">
-              <nav class="navbar navbar-expand-lg navbar-sunset">
-                <div class="container">                
-                  <?php 
-                    wp_nav_menu( array(
-                      'theme_location'  => 'primary',
-                      'container'       => false,
-                      'container_class' => false,
-                      'menu_class'      => 'navbar-nav mr-auto',
-                      'walker'          => new Bootstrap_NavWalker,
-                    ) ); 
-                  ?>
-                </div>
+              <nav class="navbar navbar-expand-lg navbar-sunset">           
+                <?php 
+                  wp_nav_menu( array(
+                    'theme_location'  => 'primary',
+                    'container'       => false,
+                    'container_class' => false,
+                    'menu_class'      => 'navbar-nav mr-auto',
+                    'walker'          => new Bootstrap_NavWalker,
+                  ) ); 
+                ?>
               </nav>
             </div><!-- nav-container -->
           </header><!-- header-container -->
