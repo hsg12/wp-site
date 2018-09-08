@@ -1,14 +1,10 @@
 @import 'bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-/* Variables */
-@import 'base/variables';
-
-/*  Mixins */
-@import 'base/mixins';
-
-/* Font Icon */
-@import 'base/fonticons';
+@import 'base/variables';    // Variables
+@import 'base/mixins';       // Mixins
+@import 'base/fonticons';    // Font Icon
+@import 'base/placeholders'; // Placeholders
 
 /* Generic */
 
@@ -43,7 +39,7 @@ a {
   position: relative;
   display: block;
   height: 326px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  @extend %text-shadow;
 }
 
 .site-title {
@@ -345,6 +341,46 @@ h2 {
     }
   }
 }
+
+/* Image Post Format */
+
+.sunset-format-image {
+  margin-top: 50px;
+
+  .entry-header {
+    position: relative;
+    height: 600px;
+    color: #FFFFFF;
+    @extend %text-shadow;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+  }
+
+  h2, .entry-meta {
+    color: #FFFFFF;
+    padding-top: 10px;
+
+    a {
+      color: #FFFFFF;
+    }
+  }
+
+
+}
+
+.entry-excert {
+    &.image-caption {
+      @extend %background-gradient2;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      color: #FFFFFF;
+      margin-bottom: 0;
+    }
+
+    
+  }
 
 
 
