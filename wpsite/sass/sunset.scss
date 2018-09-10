@@ -364,8 +364,6 @@ h2 {
       color: #FFFFFF;
     }
   }
-
-
 }
 
 .entry-excert {
@@ -378,9 +376,34 @@ h2 {
       color: #FFFFFF;
       margin-bottom: 0;
     }
-
-    
   }
+
+  /* Audio Post Format */
+
+  .sunset-format-audio {
+    .entry-content iframe {
+      width: 100%;
+    }
+
+  h2 {
+    &.entry-title {  
+      display: inline-block;
+      font-size: 30px;
+      margin-right: 20px;
+
+      &:before, &:after {
+        display: none;
+      }
+    }
+  }
+
+  .entry-meta {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  
+}
+
 
 
 
