@@ -378,7 +378,7 @@ h2 {
     }
   }
 
-  /* Audio Post Format */
+/* Audio Post Format */
 
   .sunset-format-audio {
     .entry-content iframe {
@@ -401,7 +401,20 @@ h2 {
     display: inline-block;
     margin-bottom: 0;
   }
-  
+}
+
+/* Video Post Format */
+
+.sunset-format-video {
+  header {
+    margin-top: 50px;
+
+    h2 {
+      &.entry-title {  
+        margin-top: 20px;
+      }
+    }
+  }
 }
 
 
