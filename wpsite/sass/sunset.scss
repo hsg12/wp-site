@@ -170,7 +170,12 @@ a.logo-link {
 /* Standart Post Format */
 
 article {
-  margin-bottom: 80px
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  &:first-child {
+    padding-top: 80px;
+  }
 }
 
 h2 {
@@ -188,7 +193,6 @@ h2 {
 
   &.entry-title {
     line-height: 1.5em;
-    margin: 33px 0 0;
     padding: 0;
     
     &:before, &:after {
@@ -345,7 +349,6 @@ h2 {
 /* Image Post Format */
 
 .sunset-format-image {
-  margin-top: 50px;
 
   .entry-header {
     position: relative;
@@ -407,7 +410,6 @@ h2 {
 
 .sunset-format-video {
   header {
-    margin-top: 50px;
 
     h2 {
       &.entry-title {  
@@ -416,6 +418,28 @@ h2 {
     }
   }
 }
+
+/* Carousel Post Format */
+
+.sunset-format-gallery {
+  header {
+
+    h2 {
+      &.entry-title {  
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .standard-featured {
+
+    &:after {
+      background-color: transparent;
+    }
+  }
+}
+
+
 
 
 
