@@ -437,6 +437,70 @@ h2 {
       background-color: transparent;
     }
   }
+
+  .carousel-control {
+    background: none;
+    background-image: none;;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    @extend %text-shadow;
+    font-size: 30px;
+    width: auto;
+
+    .preview-container {
+      display: block;
+      padding: 20px;
+      background-color: rgba(0,0,0,0);
+      line-height: 0;
+      position: relative;
+      @include animate(background-color, 320ms);
+
+      .thumbnail-container {
+        position: absolute;
+        display: block;
+        height: 68px;
+        width: 68px;
+        border-radius: 50%;
+        background-color: #999;
+        top: 1px;
+        @include transform( scale(0) );
+        @include animate(transform, 320ms);
+      }
+    }
+
+    &.right {
+      .preview-container {
+        padding-left: 80px;
+        border-radius: 35.5px 0 0 35.5px;
+      }
+
+      .thumbnail-container {
+        left: 1px;
+      }
+    }
+
+    &.left {
+      .preview-container {
+        padding-right: 80px;
+        border-radius: 0 35.5px 35.5px 0;
+      }
+
+      .thumbnail-container {
+        right: 1px;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      .preview-container {
+        background-color: rgba(0,0,0,0.8);
+
+        .thumbnail-container {
+          @include transform( scale(1) );
+        }
+      }
+    }
+  }
 }
 
 

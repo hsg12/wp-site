@@ -12,44 +12,44 @@
 
     <?php if (sunset_get_gallery_attachment()) : $attachments = sunset_get_gallery_attachment(7); ?>
 
-      <div id="post-gallery-<?php the_ID(); ?>" class="carousel slide" data-ride="carousel">
-
-        <ol class="carousel-indicators active">
-              
-          <?php 
-            $i = 0;
-            foreach ( $attachments as $attachment ) :  
-          ?>
-              
-          <li data-target="#post-gallery-<?php the_ID(); ?>" data-slide-to="<?php echo $i; ?>" class=""></li>
-  
-          <?php $i++; endforeach; ?>  
-        </ol>
+      <div id="post-gallery-<?php the_ID(); ?>" class="carousel slide sunset-carousel-thumb" data-ride="carousel">
 
         <div class="carousel-inner">
           <?php
-            $i = 0;
-            foreach ( $attachments as $attachment ) : 
+            $attachmentsCount = count($attachments) - 1;
+            for ( $i = 0; $i <= $attachmentsCount; $i++ ) : 
             $active = $i == 0 ? 'active' : '';
+
+            $n = $i == $attachmentsCount ? 0 : $i + 1;
+            $nextImg = wp_get_attachment_thumb_url( $attachments[$n]->ID );
+
+            $p = $i == 0 ? $attachmentsCount : $i - 1;
+            $prevImg = wp_get_attachment_thumb_url( $attachments[$p]->ID );
           ?>
             
           <div class="carousel-item <?php echo $active ?>" >
-            <img class="d-block w-100" src="<?php echo wp_get_attachment_url( $attachment->ID ); ?>" alt="" height='500'>
+            <img class="d-block w-100" src="<?php echo wp_get_attachment_url( $attachments[$i]->ID ); ?>" alt="" height='500'>
+
+            <div class="hide next-image-preview" data-image="<?php echo $nextImg; ?>"></div>
+            <div class="hide prev-image-preview" data-image="<?php echo $prevImg; ?>"></div>
           </div>
 
-          <?php
-            $i++;
-            endforeach; 
-          ?>
+          <?php endfor; ?>
         </div><!-- .carousel-inner -->
 
-        <a class="carousel-control-prev" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
+        <a class="left carousel-control-prev carousel-control" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="prev">
+          <div class="preview-container">
+            <span class="thumbnail-container background-image"></span>
+            <span class="sunset-icon sunset-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </div>
         </a>
-        <a class="carousel-control-next" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
+        <a class="right carousel-control-next carousel-control" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="next">
+          <div class="preview-container">
+            <span class="thumbnail-container background-image"></span>
+            <span class="sunset-icon sunset-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </div>
         </a>
       </div><!-- .carousel -->
       
