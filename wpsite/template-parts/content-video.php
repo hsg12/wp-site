@@ -26,7 +26,7 @@
         <div class="standard-featured" style="background-image: url(<?php echo $featured_image; ?>);"></div>
       </a>
     <?php endif; ?>
-    <div class="entry-excert text-center">
+    <div class="entry-excerpt text-center">
       <?php the_excerpt(); ?>
     </div>
     <div class="button-container text-center">

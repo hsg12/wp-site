@@ -259,14 +259,14 @@ h2 {
   }
 }
 
-.entry-excert {
+.entry-excerpt {
   font-size: 17px;
   color: $black;
   line-height: 1.4em;
   font-weight: 300;
   margin: 24px 0 39px;
   letter-spacing: 0.02em;
-  padding: 0 10px;
+  padding: 30px 10px;
   text-align: justify;
 }
 
@@ -369,7 +369,7 @@ h2 {
   }
 }
 
-.entry-excert {
+.entry-excerpt {
     &.image-caption {
       @extend %background-gradient2;
       position: absolute;
@@ -378,6 +378,11 @@ h2 {
       bottom: 0;
       color: #FFFFFF;
       margin-bottom: 0;
+      font-size: 14px;
+
+      p {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -463,8 +468,8 @@ h2 {
         border-radius: 50%;
         background-color: #999;
         top: 1px;
-        @include transform( scale(0) );
         @include animate(transform, 320ms);
+        @include transform( scale(0) );
       }
     }
 
@@ -501,6 +506,23 @@ h2 {
       }
     }
   }
+
+  .entry-excerpt {
+    &.image-caption {
+      @include animate(transform, 320ms);
+      @include transform(translateY(100%));
+    }
+  }
+
+  &:hover {
+    .entry-excerpt {
+      &.image-caption {
+        @include transform( translateY(0) );
+      }
+    }
+  }
+
+  
 }
 
 

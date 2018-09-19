@@ -15,26 +15,21 @@
       <div id="post-gallery-<?php the_ID(); ?>" class="carousel slide sunset-carousel-thumb" data-ride="carousel">
 
         <div class="carousel-inner">
-          <?php
-            $attachmentsCount = count($attachments) - 1;
-            for ( $i = 0; $i <= $attachmentsCount; $i++ ) : 
-            $active = $i == 0 ? 'active' : '';
-
-            $n = $i == $attachmentsCount ? 0 : $i + 1;
-            $nextImg = wp_get_attachment_thumb_url( $attachments[$n]->ID );
-
-            $p = $i == 0 ? $attachmentsCount : $i - 1;
-            $prevImg = wp_get_attachment_thumb_url( $attachments[$p]->ID );
-          ?>
+          <?php $attachments = sunset_get_bs_slides( $attachments ); ?>
+          <?php foreach ( $attachments as $attachment ) : ?>
             
-          <div class="carousel-item <?php echo $active ?>" >
-            <img class="d-block w-100" src="<?php echo wp_get_attachment_url( $attachments[$i]->ID ); ?>" alt="" height='500'>
+          <div class="carousel-item <?php echo $attachment['class']; ?>" >
+            <img class="d-block w-100" src="<?php echo $attachment['url']; ?>" alt="" height='500'>
 
-            <div class="hide next-image-preview" data-image="<?php echo $nextImg; ?>"></div>
-            <div class="hide prev-image-preview" data-image="<?php echo $prevImg; ?>"></div>
+            <div class="hide next-image-preview" data-image="<?php echo $attachment['next_img']; ?>"></div>
+            <div class="hide prev-image-preview" data-image="<?php echo $attachment['prev_img']; ?>"></div>
+
+            <div class="entry-excerpt text-center image-caption">
+              <div><?php echo $attachment['caption']; ?></div>
+            </div>
           </div>
 
-          <?php endfor; ?>
+          <?php endforeach; ?>
         </div><!-- .carousel-inner -->
 
         <a class="left carousel-control-prev carousel-control" href="#post-gallery-<?php the_ID(); ?>" role="button" data-slide="prev">

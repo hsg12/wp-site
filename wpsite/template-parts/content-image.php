@@ -14,7 +14,7 @@
       <?php echo sunset_posted_meta(); ?>
     </div>
 
-    <div class="entry-excert text-center image-caption">
+    <div class="entry-excerpt text-center image-caption">
       <?php the_excerpt(); ?>
     </div>
   </header>
