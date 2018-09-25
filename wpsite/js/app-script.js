@@ -14,16 +14,20 @@ jQuery(function($){
   })
 
   function sunset_get_thumbs(carousel) {
-    var nextThumb = $('.carousel-item.active').find('.next-image-preview').data('image');
-    $(carousel).find('.carousel-control.right').find('.thumbnail-container').css({
-      'background-image': 'url(' + nextThumb + ')',
-      'transition': 'background-image, 100ms'
-    });
+    $(carousel).each(function() {
 
-    var prevThumb = $('.carousel-item.active').find('.prev-image-preview').data('image');
-    $(carousel).find('.carousel-control.left').find('.thumbnail-container').css({
-      'background-image': 'url(' + prevThumb + ')',
-      'transition': 'background-image, 100ms'
+      var nextThumb = $(this).find('.carousel-item.active').find('.next-image-preview').data('image');
+      $(this).find('.carousel-control.right').find('.thumbnail-container').css({
+        'background-image': 'url(' + nextThumb + ')',
+        'transition': 'background-image, 100ms'
+      });
+
+      var prevThumb = $(this).find('.carousel-item.active').find('.prev-image-preview').data('image');
+      $(this).find('.carousel-control.left').find('.thumbnail-container').css({
+        'background-image': 'url(' + prevThumb + ')',
+        'transition': 'background-image, 100ms'
+      });
+
     });
   }
 

@@ -183,3 +183,13 @@ function sunset_get_bs_slides( $attachments ) {
 
   return $output;
 }
+
+function sunset_grab_url() {
+  $match = preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]>/i', get_the_content(), $links );
+
+  if ( ! $match ) {
+    return false;
+  }
+
+  return esc_url_raw( $links[1] );
+}
