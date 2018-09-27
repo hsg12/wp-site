@@ -31,6 +31,34 @@ jQuery(function($){
     });
   }
 
+  /* Ajax functions */
 
+  $('.sunset-load-more').on('click', function(e) {
+    
+    var that = $(this);
+    var page = that.data('page');
+    var newPage = page + 1;
+    var ajaxUrl = that.data('url');
+    
+    $.ajax({
+      url: ajaxUrl,
+      type: 'post',
+      data: {
+        page: page,
+        action: 'sunset_load_more'
+      },
+      success: function(response) {
+        that.data('page', newPage);
+        $('.sunset-posts-container').append(response);
+      },
+      error: function(response){
+        console.log(response);
+      }
+    });
+
+    return false;
+    
+  })
 
 });
+
