@@ -2,9 +2,6 @@
 
 /* Ajax functions */
 
-add_action( 'wp_ajax_nopriv_sunset_load_more', 'sunset_load_more' ); // For all users
-add_action( 'wp_ajax_sunset_load_more', 'sunset_load_more' ); // Only for admins
-
 function sunset_load_more() {
   $paged = $_POST['page'] + 1; // we want to load posts from 2 page
 
@@ -24,4 +21,5 @@ function sunset_load_more() {
   exit; // we must use exit in ajax functions always
 }
 
-
+add_action( 'wp_ajax_nopriv_sunset_load_more', 'sunset_load_more' ); // For all users
+add_action( 'wp_ajax_sunset_load_more', 'sunset_load_more' ); // Only for admins

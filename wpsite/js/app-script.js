@@ -33,12 +33,16 @@ jQuery(function($){
 
   /* Ajax functions */
 
-  $('.sunset-load-more').on('click', function(e) {
+  $(document).on('click', '.sunset-load-more:not(.loading)', function() {
     
     var that = $(this);
     var page = that.data('page');
     var newPage = page + 1;
     var ajaxUrl = that.data('url');
+
+    that.addClass('loading');
+    that.find('.text').slideUp(320);
+    that.find('.sunset-icon').addClass('spin');
     
     $.ajax({
       url: ajaxUrl,
@@ -50,14 +54,14 @@ jQuery(function($){
       success: function(response) {
         that.data('page', newPage);
         $('.sunset-posts-container').append(response);
-      },
-      error: function(response){
-        console.log(response);
+
+        setTimeout(function(){
+          that.removeClass('loading');
+          that.find('.text').slideDown(320);
+          that.find('.sunset-icon').removeClass('spin');
+        }, 2000);
       }
     });
-
-    return false;
-    
   })
 
 });
