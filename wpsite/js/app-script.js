@@ -1,19 +1,15 @@
 jQuery(function($){
 
+  sunset_get_thumbs() // See function declaration on line 31 (here we invoke it)
+  revealPosts(); // See function declaration on line 42 (here we invoke it)
+ 
   // If navbar links have nested links
   $('.navbar-sunset ul li a').addClass('link-after');
   $('.navbar-sunset ul li.dropdown a').removeClass('link-after').addClass('link-before');
   $('.dropdown-menu a').removeClass('link-before');
 
   // For slider thumbnails
-  var carousel = '.sunset-carousel-thumb';
-  sunset_get_thumbs(carousel);
-
-  $(carousel).on('slid.bs.carousel', function() {
-    sunset_get_thumbs(carousel);
-  })
-
-  function sunset_get_thumbs(carousel) {
+  function sunset_get_bs_thumbs(carousel) {
     $(carousel).each(function() {
 
       var nextThumb = $(this).find('.carousel-item.active').find('.next-image-preview').data('image');
@@ -29,6 +25,35 @@ jQuery(function($){
       });
 
     });
+  }
+
+  // This wrap function inforce to work carousel
+  function sunset_get_thumbs(){
+    var carousel = '.sunset-carousel-thumb';
+    sunset_get_bs_thumbs(carousel);
+
+    $(carousel).on('slid.bs.carousel', function(){
+      sunset_get_bs_thumbs(carousel);
+    });
+  }
+
+  /* Helper functions */
+
+  function revealPosts() {
+    var posts = $('article:not(.reveal)');
+    var i = 0;
+    var postsLength = posts.length;
+
+    setInterval(function(){
+      if (i >= postsLength) return false;
+
+      var el = posts[i];
+      $(el).addClass('reveal');
+      $(el).find('.sunset-carousel-thumb').carousel();
+      sunset_get_thumbs();
+
+      i++;
+    }, 200);
   }
 
   /* Ajax functions */
@@ -52,14 +77,18 @@ jQuery(function($){
         action: 'sunset_load_more'
       },
       success: function(response) {
-        that.data('page', newPage);
-        $('.sunset-posts-container').append(response);
-
+  
         setTimeout(function(){
+          that.data('page', newPage);
+          $('.sunset-posts-container').append(response);
+
           that.removeClass('loading');
           that.find('.text').slideDown(320);
           that.find('.sunset-icon').removeClass('spin');
-        }, 2000);
+
+          revealPosts();
+        }, 1000);
+
       }
     });
   })
