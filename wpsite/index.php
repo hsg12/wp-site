@@ -2,17 +2,38 @@
 
 <div id="primary" class="content-area">
   <main id="main" class="site-main" role="main">
+  
+    <?php if ( is_paged() ) : ?>
+
+      <div class="container text-center container-load-previous">
+        <a href="#" class="btn-sunset-load sunset-load-more" 
+           data-page="<?php echo sunset_check_paged(1); ?>"
+           data-prev="1"
+           data-url="<?php echo admin_url( 'admin-ajax.php' )?>"
+           onclick="return false"
+        >
+          <span class="sunset-icon sunset-loading"></span>
+          <span class="text">Load Previous</span>
+        </a>
+      </div><!-- .container -->
+
+    <?php endif; ?>
+
     <div class="container sunset-posts-container">
       <?php if ( have_posts() ) : ?>
-        <?php while ( have_posts() ) : the_post(); ?>
-          <?php get_template_part( 'template-parts/content', get_post_format() ) ?>
-        <?php endwhile; ?>
+        <div class="page-limit" data-page="<?php echo get_site_url(null , null , "http") ?>/<?php echo sunset_check_paged(); ?>">
+
+          <?php while ( have_posts() ) : the_post(); ?>
+            <?php get_template_part( 'template-parts/content', get_post_format() ) ?>
+          <?php endwhile; ?>
+
+        </div>
       <?php endif; ?>
     </div><!-- .container -->
 
     <div class="container text-center">
       <a href="#" class="btn-sunset-load sunset-load-more" 
-         data-page="1"
+         data-page="<?php echo sunset_check_paged(1); ?>"
          data-url="<?php echo admin_url( 'admin-ajax.php' )?>"
          onclick="return false"
       >
@@ -20,6 +41,7 @@
         <span class="text">Load More</span>
       </a>
     </div><!-- .container -->
+
   </main>
 </div><!-- #primary -->
 

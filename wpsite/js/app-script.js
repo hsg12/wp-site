@@ -37,6 +37,24 @@ jQuery(function($){
     });
   }
 
+  /* Scroll functions */
+
+  var lastScroll = 0;
+
+  $(window).scroll( function(){
+    var scroll = $(window).scrollTop();
+    if (Math.abs(scroll - lastScroll) > $(window).height() * 0.1) { // 10% of window height
+      lastScroll = scroll;
+
+      $('.page-limit').each(function(index){
+        if (isVisible( $(this) )) {
+          window.history.replaceState(null, null, $(this).attr('data-page'));
+          return false;
+        }
+      });
+    }
+  } );
+
   /* Helper functions */
 
   function revealPosts() {
@@ -56,6 +74,16 @@ jQuery(function($){
     }, 200);
   }
 
+  function isVisible(element) {
+    var scrollPos = $(window).scrollTop();
+    var windowHeight = $(window).height();
+    var elementTop = $(element).offset().top;
+    var elementHeight = $(element).height();
+    var elementBottom = elementTop + elementHeight;
+
+    return ( (elementBottom - elementHeight * 0.25 > scrollPos) && (elementTop < (scrollPos + 0.5 * windowHeight)) );
+  }
+
   /* Ajax functions */
 
   $(document).on('click', '.sunset-load-more:not(.loading)', function() {
@@ -64,6 +92,11 @@ jQuery(function($){
     var page = that.data('page');
     var newPage = page + 1;
     var ajaxUrl = that.data('url');
+    var prev = that.data('prev');
+
+    if (typeof prev === 'undefined') {
+      prev = 0;
+    }
 
     that.addClass('loading');
     that.find('.text').slideUp(320);
@@ -74,20 +107,40 @@ jQuery(function($){
       type: 'post',
       data: {
         page: page,
+        prev: prev,
         action: 'sunset_load_more'
       },
       success: function(response) {
-  
-        setTimeout(function(){
-          that.data('page', newPage);
-          $('.sunset-posts-container').append(response);
 
-          that.removeClass('loading');
-          that.find('.text').slideDown(320);
-          that.find('.sunset-icon').removeClass('spin');
+        if (response == 0) {
 
-          revealPosts();
-        }, 1000);
+          $('.sunset-posts-container').append('<div class="text-center"><h3>You reached the end of the line!</h3><p>No more posts to load</p></div>');
+          that.slideUp(320);
+
+        } else {
+
+          setTimeout(function(){
+            if (prev == 1) {
+              $('.sunset-posts-container').prepend(response);
+              newPage = page - 1;
+            } else {
+              $('.sunset-posts-container').append(response);
+            }
+
+            if (newPage == 1) {
+              that.slideUp(320);
+            } else {
+              that.data('page', newPage);
+            
+              that.removeClass('loading');
+              that.find('.text').slideDown(320);
+              that.find('.sunset-icon').removeClass('spin');
+            }
+
+            revealPosts();
+          }, 1000);
+
+        }
 
       }
     });
