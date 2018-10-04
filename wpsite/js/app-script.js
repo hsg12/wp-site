@@ -93,9 +93,16 @@ jQuery(function($){
     var newPage = page + 1;
     var ajaxUrl = that.data('url');
     var prev = that.data('prev');
+    var archive = that.data('archive');
+
+    console.log(archive);
 
     if (typeof prev === 'undefined') {
       prev = 0;
+    }
+
+    if (typeof archive === 'undefined') {
+      archive = 0;
     }
 
     that.addClass('loading');
@@ -107,6 +114,7 @@ jQuery(function($){
       type: 'post',
       data: {
         page: page,
+        archive: archive,
         prev: prev,
         action: 'sunset_load_more'
       },

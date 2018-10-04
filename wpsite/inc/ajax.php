@@ -3,21 +3,38 @@
 /* Ajax functions */
 
 function sunset_load_more() {
-  $paged = $_POST['page'] + 1; // we want to load posts from 2 page
-  $prev  = $_POST['prev'];
+  $paged   = $_POST['page'] + 1; // we want to load posts from 2 page
+  $prev    = $_POST['prev'];
+  $archive = $_POST['archive'];
 
   if ( $prev == 1 && $_POST['page'] != 1 ) { // this mean we want to load previous page
     $paged = $_POST['page'] - 1;
   }
 
-  $query = new WP_Query( array(
+  $args = array(
     'post_type'   => 'post',
     'post_status' => 'publish',
     'paged'       => $paged,
-  ) );
+  );
+
+  if ( $archive != '0' ) {
+    $archive_values = explode( '/', $archive );
+
+    if ( $archive_values[1] == 'category' ) {
+      $args['category_name'] = $archive_values[2];
+    } else {
+      $args[$archive_values[1]] = $archive_values[2];
+    }
+
+    $page_trail = '/' . $archive_values[1] . '/' . $archive_values[2] . '/';
+  } else {
+    $page_trail = '/';
+  }
+
+  $query = new WP_Query( $args );
 
   if ( $query->have_posts() ) : 
-    echo '<div class="page-limit" data-page="' . get_site_url(null , null , "http") . '/page/' . $paged . '">';
+    echo '<div class="page-limit" data-page="' . get_site_url(null , null , "http") . $page_trail . 'page/' . $paged . '">';
       while ( $query->have_posts() ) : $query->the_post();
         get_template_part( 'template-parts/content', get_post_format() );
       endwhile; 
