@@ -193,3 +193,13 @@ function sunset_grab_url() {
 
   return esc_url_raw( $links[1] );
 }
+
+function sunset_grab_current_uri() {
+  $archive_uri = '';
+
+  $http = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+  $referer = $http . $_SERVER['HTTP_HOST'];
+  $archive_uri =  $referer . $_SERVER['REQUEST_URI'];
+
+  return $archive_uri;
+}

@@ -19,14 +19,38 @@ function sunset_load_more() {
 
   if ( $archive != '0' ) {
     $archive_values = explode( '/', $archive );
+    $flipped = array_flip( $archive_values );
 
-    if ( $archive_values[1] == 'category' ) {
-      $args['category_name'] = $archive_values[2];
-    } else {
-      $args[$archive_values[1]] = $archive_values[2];
+    switch ( isset( $flipped ) ) {
+      case $flipped['category'] :
+        $type = 'category_name';
+        $key  = 'category';
+        break;
+      
+      case $flipped['tag'] :
+        $type = 'tag';
+        $key  = $type;
+        break;
+
+      case $flipped['author'] :
+        $type = 'author';
+        $key  = $type;
+        break;
     }
 
-    $page_trail = '/' . $archive_values[1] . '/' . $archive_values[2] . '/';
+    $currentKey = array_keys( $archive_values, $key );
+    $nextKey = $currentKey[0] + 1;
+    $value = $archive_values[$nextKey];
+    $args[$type] = $value;
+
+    //if ( in_array( 'page', $archive_values ) ) {
+    if ( isset( $flipped['page'] ) ) {
+      $uri_values = explode( 'page', $archive );
+      $page_trail = $uri_values[0];
+    } else {
+      $page_trail = $archive;
+    }
+
   } else {
     $page_trail = '/';
   }
@@ -34,7 +58,7 @@ function sunset_load_more() {
   $query = new WP_Query( $args );
 
   if ( $query->have_posts() ) : 
-    echo '<div class="page-limit" data-page="' . get_site_url(null , null , "http") . $page_trail . 'page/' . $paged . '">';
+    echo '<div class="page-limit" data-page="' . $page_trail . 'page/' . $paged . '/">';
       while ( $query->have_posts() ) : $query->the_post();
         get_template_part( 'template-parts/content', get_post_format() );
       endwhile; 

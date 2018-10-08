@@ -4,7 +4,7 @@
   <main id="main" class="site-main" role="main">
 
     <header class="archive-header text-center">
-      <?php the_archive_title( '<h2 class="page-title">', '</h2>' ); ?>
+      <?php the_archive_title( '<h2 class="page-title mt-3">', '</h2>' ); ?>
     </header>
   
     <?php if ( is_paged() ) : ?>
@@ -12,7 +12,7 @@
       <div class="container text-center container-load-previous">
         <a href="#" class="btn-sunset-load sunset-load-more" 
            data-page="<?php echo sunset_check_paged(1); ?>"
-           data-archive="<?php echo $_SERVER['REQUEST_URI']; ?>"
+           data-archive="<?php echo sunset_grab_current_uri(); ?>"
            data-prev="1"
            data-url="<?php echo admin_url( 'admin-ajax.php' )?>"
            onclick="return false"
@@ -40,7 +40,7 @@
     <div class="container text-center">
       <a href="#" class="btn-sunset-load sunset-load-more" 
          data-page="<?php echo sunset_check_paged(1); ?>"
-         data-archive="<?php echo $_SERVER['REQUEST_URI']; ?>"
+         data-archive="<?php echo sunset_grab_current_uri(); ?>"
          data-url="<?php echo admin_url( 'admin-ajax.php' )?>"
          onclick="return false"
       >

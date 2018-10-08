@@ -95,8 +95,6 @@ jQuery(function($){
     var prev = that.data('prev');
     var archive = that.data('archive');
 
-    console.log(archive);
-
     if (typeof prev === 'undefined') {
       prev = 0;
     }
