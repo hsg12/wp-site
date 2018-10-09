@@ -5,6 +5,7 @@
 @import 'base/mixins';       // Mixins
 @import 'base/fonticons';    // Font Icon
 @import 'base/placeholders'; // Placeholders
+@import 'base/wordpress';    // Wordpress bas classes
 
 /* Generic */
 
@@ -687,4 +688,24 @@ h2 {
   animation-duration: 1s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+/* Single */
+
+.entry-content {
+  margin-top: 40px;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  line-height: 1.7em;
+
+  p {
+    margin-bottom: 15px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  
 }
