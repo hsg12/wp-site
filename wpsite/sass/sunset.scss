@@ -698,6 +698,16 @@ h2 {
   letter-spacing: 0.02em;
   line-height: 1.7em;
 
+  .sunset-tooltip {
+    color: #F56B08;
+    cursor: crosshair;
+
+    &:hover,
+    &:focus {
+      color: lighten(#F56B08, 30%);
+    }
+  }
+
   p {
     margin-bottom: 15px;
   }
@@ -709,3 +719,4 @@ h2 {
 
   
 }
+

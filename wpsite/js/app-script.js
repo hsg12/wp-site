@@ -58,6 +58,9 @@ jQuery(function($){
   /* Helper functions */
 
   function revealPosts() {
+
+    $('[data-toggle="tooltip"]').tooltip()
+    
     var posts = $('article:not(.reveal)');
     var i = 0;
     var postsLength = posts.length;
