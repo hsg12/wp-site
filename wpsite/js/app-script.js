@@ -59,7 +59,8 @@ jQuery(function($){
 
   function revealPosts() {
 
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover();
     
     var posts = $('article:not(.reveal)');
     var i = 0;

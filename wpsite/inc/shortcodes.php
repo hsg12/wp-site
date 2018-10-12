@@ -6,6 +6,8 @@
   =======================
 */
 
+/* Tooltip */
+
 function sunset_tooltip( $atts, $content = null ) {
   $res = '';
   $dataArray = array(
@@ -25,3 +27,25 @@ function sunset_tooltip( $atts, $content = null ) {
 }
 
 add_shortcode( 'tooltip', 'sunset_tooltip' );
+
+/* Popover */
+
+function sunset_popover( $atts, $betweenTags = null ) {
+  $res = '';
+  $dataArray = array(
+    'placement' => 'top',
+    'title'     => '',
+    'trigger'   => 'click',
+    'content'   => '',
+  );
+
+  extract( shortcode_atts( $dataArray, $atts, 'popover' ) );
+
+  $res .= '<span class="sunset-popover" data-toggle="popover" data-placement="' . $placement . '" title="' . $title . '" data-trigger="' . $trigger . '" data-content="' . $content . '">';
+  $res .= $betweenTags;
+  $res .= '</span>';
+
+  return $res;
+}
+
+add_shortcode( 'popover', 'sunset_popover' );

@@ -698,7 +698,8 @@ h2 {
   letter-spacing: 0.02em;
   line-height: 1.7em;
 
-  .sunset-tooltip {
+  .sunset-tooltip,
+  .sunset-popover {
     color: #F56B08;
     cursor: crosshair;
 
@@ -706,6 +707,10 @@ h2 {
     &:focus {
       color: lighten(#F56B08, 30%);
     }
+  }
+
+  .sunset-popover {
+    cursor: pointer;
   }
 
   p {
@@ -716,7 +721,17 @@ h2 {
     max-width: 100%;
     height: auto;
   }
+}
 
-  
+.post-link-nav {
+
+  a {
+    color: #F56B08;
+
+    &:hover,
+    &:focus {
+      color: darken(#F56B08, 10%);
+    }
+  }
 }
 

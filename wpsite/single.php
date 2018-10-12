@@ -11,7 +11,7 @@
               <?php while ( have_posts() ) : the_post(); ?>
                 <?php get_template_part( 'template-parts/single', get_post_format() ) ?>
 
-                <?php the_post_navigation(); ?>
+                <?php echo sunset_post_navigation(); ?>
                 
                 <?php 
                   if ( comments_open()) {
