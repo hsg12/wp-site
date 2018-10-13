@@ -724,9 +724,15 @@ h2 {
 }
 
 .post-link-nav {
+  display: flex;
+
+  span {
+    margin-top: -1px;
+  }
 
   a {
     color: #F56B08;
+    display: inline-block;
 
     &:hover,
     &:focus {
@@ -735,3 +741,44 @@ h2 {
   }
 }
 
+.sunset-shareThis {
+  clear: both;
+  margin: 40px 0;
+
+  .sunset-soc-icons {
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      margin: 0 4px;
+    }
+
+    span.fa {
+      font-size: 2em;
+      color: #02ABED;
+      @include animate(color, 320ms);
+
+      &:hover {
+        color: darken(#02ABED, 10%);
+      }
+    }
+
+    li:nth-child(2) span.fa {
+      color: #369;
+
+      &:hover {
+        color: darken(#369, 10%);
+      }
+    }
+
+    li:nth-child(3) span.fa {
+      color: #d00;
+
+      &:hover {
+        color: darken(#d00, 10%);
+      }
+    }
+  }
+}

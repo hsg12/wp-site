@@ -216,12 +216,41 @@ function sunset_post_navigation() {
   $prev = get_previous_post_link( '<div class="post-link-nav"><span class="mr-1">&laquo;</span> %link</div>', '%title' );
   $nav .= '<div class="col-12 col-sm-6">' . $prev . '</div>';
 
-  $next = get_next_post_link( '<div class="post-link-nav">%link <span class="ml-1">&raquo;</span></div>', '%title' );
-  $nav .= '<div class="col-12 col-sm-6 text-right">' . $next . '</div>';
+  $next = get_next_post_link( '<div class="post-link-nav justify-content-end">%link <span class="ml-1">&raquo;</span></div>', '%title' );
+  $nav .= '<div class="col-12 col-sm-6">' . $next . '</div>';
 
   $nav .= '</div>';
 
   return $nav;
 }
 
+function sunset_share_this( $content ) {
 
+  if ( is_single() ) {
+    $output = '<div class="sunset-shareThis">';
+    $output .= '<h4 class="text-center">Share This</h4>';
+
+    $title = get_the_title();
+    $permalink = get_permalink();
+
+    $twitterHandler = get_option( 'twitter_handler' ) ? '&amp;via=' . esc_attr( get_option( 'twitter_handler' ) ) : '';
+
+    $twitter = 'https://twitter.com/intent/tweet?text=Hey! Read this: ' . $title . '&amp;url=' . $permalink . $twitterHandler;
+    $facebook = 'https://facebook.com/sharer/sharer.php?u=' . $permalink;
+    $google = 'https://plus.google.com/share?url=' . $permalink;
+
+    $output .= '<ul class="sunset-soc-icons">';
+    $output .= '<li><a href="' . $twitter . '" rel="nofollow"><span class="fa fa-twitter-square"></span></a></li>';
+    $output .= '<li><a href="' . $facebook . '" rel="nofollow"><span class="fa fa-facebook-square"></span></a></li>';
+    $output .= '<li><a href="' . $google . '" rel="nofollow"><span class="fa fa-google-plus-square"></span></a></li>';
+    $output .= '</ul>';
+
+    $output .= '</div>';
+
+    return $content . $output;
+  } else {
+    return $content;
+  }
+}
+
+add_filter( 'the_content', 'sunset_share_this' );
