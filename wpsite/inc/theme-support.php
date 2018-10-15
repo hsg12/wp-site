@@ -27,6 +27,9 @@ if (isset($customBackground) && $customBackground == 1) {
 
 add_theme_support( 'post-thumbnails' );
 
+/* Activate HTML5 Features */
+add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+
 /* Activate Nav Menu Option */
 
 function sunset_register_nav_menu() {
