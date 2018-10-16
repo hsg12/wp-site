@@ -290,7 +290,7 @@ h2 {
 }
 
 .entry-footer {
-  padding: 4px 5px;
+  padding: 4px 5px 20px;
   border-bottom: 4px solid $lighter-grey;
   color: $light-grey;
   text-transform: uppercase;
@@ -781,4 +781,11 @@ h2 {
       }
     }
   }
+}
+
+/* Comment section */
+
+.comments-area {
+  border-top: 4px solid $lighter-grey;
+  margin-top: 40px;
 }
