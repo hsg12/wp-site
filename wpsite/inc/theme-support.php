@@ -257,3 +257,18 @@ function sunset_share_this( $content ) {
 }
 
 add_filter( 'the_content', 'sunset_share_this' );
+
+function sunset_get_post_navigation () {
+  if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) {
+    require( get_template_directory() . '/inc/templates/sunset-comment-nav.php' );
+  } 
+}
+
+function wpb_move_comment_field_to_bottom( $fields ) {
+  $comment_field = $fields['comment'];
+  unset( $fields['comment'] );
+  $fields['comment'] = $comment_field;
+  return $fields;
+}
+ 
+add_filter( 'comment_form_fields', 'wpb_move_comment_field_to_bottom' );

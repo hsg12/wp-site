@@ -11,7 +11,7 @@ if ( post_password_required() ) {
 
     <!-- Comments title and count -->
 
-    <h4 class="comment-title mt-5">
+    <h4 class="comment-title mt-2">
       <?php
         printf(
           esc_html( _nx( 'One comment on &ldquo;%2$s&rdquo;', '%1$s comments on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'wp-site' ) ),
@@ -23,27 +23,7 @@ if ( post_password_required() ) {
 
     <!-- Comments pagination -->
 
-    <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-      <nav id="comment-nav-top" class="comment-navigation" role="navigation"> 
-        <div class="row">
-
-          <div class="col-12 col-sm-6">
-            <div class="post-link-nav">
-              <span class="mr-1">&laquo;</span>
-              <?php previous_comments_link( esc_html__( 'Older Comments', 'wp-site' ) ) ?>
-            </div>
-          </div>
-
-           <div class="col-12 col-sm-6 text-right">
-            <div class="post-link-nav">
-              <?php next_comments_link( esc_html__( 'Newer Comments', 'wp-site' ) ) ?>
-              <span class="mr-1">&raquo;</span>
-            </div>
-          </div>
-
-        </div>
-      </nav>
-    <?php endif; ?>
+    <?php echo sunset_get_post_navigation (); ?>
 
     <!-- Comments list -->
 
@@ -73,27 +53,7 @@ if ( post_password_required() ) {
 
     <!-- Comments pagination -->
 
-    <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
-      <nav id="comment-nav-bottom" class="comment-navigation" role="navigation">
-        <div class="row">
-
-          <div class="col-12 col-sm-6">
-            <div class="post-link-nav">
-              <span class="mr-1">&laquo;</span>
-              <?php previous_comments_link( esc_html__( 'Older Comments', 'wp-site' ) ) ?>
-            </div>
-          </div>
-
-           <div class="col-12 col-sm-6 text-right">
-            <div class="post-link-nav">
-              <?php next_comments_link( esc_html__( 'Newer Comments', 'wp-site' ) ) ?>
-              <span class="mr-1">&raquo;</span>
-            </div>
-          </div>
-
-        </div>
-      </nav>
-    <?php endif; ?>
+    <?php echo sunset_get_post_navigation (); ?>
 
     <?php if ( !comments_open() && get_comments_number() ) : ?>
       <p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'wp-site' ); ?></p>
@@ -101,5 +61,33 @@ if ( post_password_required() ) {
 
   <?php endif; ?>
 
-  <?php comment_form(); ?>
+  <?php 
+    $fields = array(
+      'author' =>
+        '<div class="form-group">
+          <label for="author">' . __( 'Name', 'wp-site' ) . '<span class="required">*</span></label>
+          <input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required" />
+        </div>',
+      'email' =>
+        '<div class="form-group">
+          <label for="email">' . __( 'Email', 'wp-site' ) . '<span class="required">*</span></label>
+          <input id="email" name="email" class="form-control" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" required="required" />
+        </div>',
+      'url' =>
+        '<div class="form-group">
+          <label for="url">' . __( 'Website', 'wp-site' ) . '</label>
+          <input id="url" name="url" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) . '" />
+        </div>',
+    );
+
+    $args = array(
+      'class_form'    => 'app-comment-form',
+      'class_submit'  => 'btn btn-block btn-secondary btn-lg mt-4',
+      'label_submit'  => __( 'Submit Comment' ),
+      'comment_field' => '<div class="form-group"><label for="comment">' . _x( 'Comment', 'wp-site' ) . '<span class="required">*</span></label><textarea id="comment" name="comment" class="form-control" required="required" ></textarea></div>',
+      'fields'        => apply_filters( 'comment_form_default_fields', $fields ),
+    );
+
+    comment_form( $args ); 
+  ?>
 </div><!-- .comments-area -->

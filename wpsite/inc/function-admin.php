@@ -174,16 +174,10 @@ function sunset_sidebar_profile_picture() {
   }
 }
 
-
-
-
-
-
 // Theme Support Options Functions
 
 function sunset_post_formats_callback( $input ) {
   return $input;
-  // var_dump($input);
   exit();
 }
 
@@ -232,8 +226,6 @@ function sunset_custom_background() {
   echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" ' . $checked . '>Activate the Custom Background</label>';
 }
 
-
-
 // Contact Form Options Functions
 
 function sunset_contact_section() {
@@ -252,8 +244,6 @@ function sunset_activate_contact() {
   echo '<label><input type="checkbox" id="activate_contact_form" name="activate_contact_form" value="1" ' . $checked . '></label>';
 }
 
-
-
 // Custom CSS Options Functions
 
 function sunset_custom_css_section_callback() {
@@ -267,11 +257,6 @@ function sunset_custom_css_callback() {
   // ace code editor from https://github.com/ajaxorg/ace-builds ( src-min folder )
   echo '<div id="customCss">' . $css . '</div><textarea id="sunset_css" name="sunset_css" style="display: none; visibility: hidden;">' . $css . '</textarea>'; 
 }
-
-
-
-
-
 
 // Sanitization settings
 
