@@ -38,7 +38,33 @@ function sunset_register_nav_menu() {
 
 add_action( 'after_setup_theme', 'sunset_register_nav_menu' );
 
-/* Blog Loop Custom Functions */
+/*
+  =================
+  Sidebar Functions
+  =================
+*/
+
+function sunset_sidebar_init() {
+  register_sidebar(
+    array(
+      'name'          => __( 'Sinset Sidebar', 'wp-site' ),
+      'id'            => 'sunset_sidebar',
+      'description'   => 'Dynamic Right Sidebar',
+      'before_widget' => '<section id="%1$s" class="sunset-widget %2$s">',
+      'after_widget'  => '</section>',
+      'before_title'  => '<h2 class="sunset-widget-title">',
+      'after_title'   => '</h2>'
+    )
+  );
+}
+
+add_action( 'widgets_init', 'sunset_sidebar_init' );
+
+/*
+  ==========================
+  Blog Loop Custom Functions
+  ==========================
+*/
 
 function sunset_posted_meta() {
   $posted_on  = human_time_diff( get_the_time('U'), current_time('timestamp') );
@@ -69,6 +95,7 @@ function sunset_posted_meta() {
 
 function sunset_posted_footer() {
   $comments_num = get_comments_number();
+
   if ( comments_open() ) {
 
     if ( $comments_num == 0 ) {

@@ -22,6 +22,13 @@
   </head>
   
   <body <?php body_class(); ?>>
+    <div class="sunset-sidebar">
+      <div class="sidebar-scroll">
+        <?php get_sidebar(); ?>
+      </div>
+    </div>
+
+
     <div class="container-fluid p-0">
       <div class="row no-gutters">
         <div class="col-12">

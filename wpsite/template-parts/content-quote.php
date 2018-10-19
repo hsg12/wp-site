@@ -17,8 +17,6 @@
     </div>
   </header>
 
-  
-  
   <footer class="entry-footer">
     <?php echo sunset_posted_footer(); ?>
   </footer>

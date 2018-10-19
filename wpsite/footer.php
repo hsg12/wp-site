@@ -5,7 +5,7 @@
 */
 ?>
   <footer class="sunset-footer text-center">
-    This is the footer
+    <div>This is the footer</div>
   </footer>
   <?php wp_footer(); ?>
   </body>

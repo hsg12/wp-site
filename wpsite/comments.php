@@ -26,29 +26,29 @@ if ( post_password_required() ) {
     <?php echo sunset_get_post_navigation (); ?>
 
     <!-- Comments list -->
+    
+    <?php
+      $args = array(
+        'walker'            => null,
+        'max_depth'         => '',
+        'style'             => 'ol',
+        'callback'          => null,
+        'end-callback'      => null,
+        'type'              => 'all',
+        'reply_text'        => 'Reply',
+        'page'              => '',
+        'per_page'          => '',
+        'avatar_size'       => 64,
+        'reverse_top_level' => null,
+        'reverse_children'  => '',
+        'format'            => 'html5',
+        'short_ping'        => false,
+        'echo'              => true,
+      );
+    ?>
 
     <ol class="comment-list">
-      <?php
-        $args = array(
-          'walker'            => null,
-          'max_depth'         => '',
-          'style'             => 'ol',
-          'callback'          => null,
-          'end-callback'      => null,
-          'type'              => 'all',
-          'reply_text'        => 'Reply',
-          'page'              => '',
-          'per_page'          => '',
-          'avatar_size'       => 64,
-          'reverse_top_level' => null,
-          'reverse_children'  => '',
-          'format'            => 'html5',
-          'short_ping'        => false,
-          'echo'              => true,
-        );
-
-        wp_list_comments( $args );
-      ?>
+      <?php wp_list_comments( $args ); ?>
     </ol>
 
     <!-- Comments pagination -->
