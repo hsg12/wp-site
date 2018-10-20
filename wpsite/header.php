@@ -22,17 +22,30 @@
   </head>
   
   <body <?php body_class(); ?>>
-    <div class="sunset-sidebar">
-      <div class="sidebar-scroll">
-        <?php get_sidebar(); ?>
+
+    <div class="sunset-sidebar sidebar-closed">
+      <div class="sunset-sidebar-container">
+
+        <a href="#" class="js-toggleSidebar sidebar-close">
+          <span class="sunset-icon sunset-close"></span>
+        </a>
+
+        <div class="sidebar-scroll">
+          <?php get_sidebar(); ?>
+        </div>
+
       </div>
     </div>
-
 
     <div class="container-fluid p-0">
       <div class="row no-gutters">
         <div class="col-12">
           <header class="header-container background-image text-center" style="background-image: url(<?php header_image(); ?>);">
+            
+            <a href="#" class="js-toggleSidebar sidebar-open">
+              <span class="sunset-icon sunset-menu"></span>
+            </a>
+
             <div class="header-content app-table">
               <div class="app-table-cell">
                 <h1 class="site-title">

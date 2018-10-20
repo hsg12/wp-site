@@ -151,10 +151,15 @@ jQuery(function($){
           }, 1000);
 
         }
-
       }
     });
   })
 
-});
+  /* Sidebar functions */
 
+  $(document).on('click', '.js-toggleSidebar', function() {
+    $('.sunset-sidebar').toggleClass('sidebar-closed');
+    return false;
+  });
+
+});
