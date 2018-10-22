@@ -39,9 +39,13 @@ add_action( 'admin_enqueue_scripts', 'sunset_load_admin_scripts' );
 
 function sunset_load_scripts( $page ) {
     wp_register_style( 'sunset-css', get_template_directory_uri() . '/css/sunset.css', array(), '1.0.0' );
-    wp_register_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' );
     wp_enqueue_style( 'sunset-css' );
+
+    wp_register_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' );
     wp_enqueue_style( 'font-awesome' );
+
+    wp_register_style( 'sunset_admin', get_template_directory_uri() . '/css/sunset.admin.css', array(), '1.0.0' );
+    wp_enqueue_style( 'sunset_admin' );
 
     wp_register_script( 'popper', get_template_directory_uri() . '/js/popper.min.js', array(), null, true );
     wp_register_script( 'bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.0.0', true );

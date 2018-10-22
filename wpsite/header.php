@@ -23,7 +23,8 @@
   
   <body <?php body_class(); ?>>
 
-    <div class="sunset-sidebar sidebar-closed">
+    <div class="sunset-sidebar"><!-- sidebar-closed -->
+    
       <div class="sunset-sidebar-container">
 
         <a href="#" class="js-toggleSidebar sidebar-close">
