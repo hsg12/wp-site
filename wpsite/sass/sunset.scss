@@ -865,12 +865,36 @@ h2 {
   color: #fff;
   @include animate(transform, 320ms);
 
+  .white-hr {
+    background-color: #fff;
+  }
+
   &.sidebar-closed {
     @include transform(translateX(100%));
   }
 
   h2 {
     color: #fff;
+  }
+
+  a span{
+    color: #aaa !important;
+    @include animate(color, 320ms);
+  }
+
+  a:hover span,
+  a:hover span {
+    color: #fff !important;
+  }
+
+  a {
+    color: #aaa !important;
+    @include animate(color, 320ms);
+  }
+
+  a:hover,
+  a:hover {
+    color: #fff !important;
   }
 }
 
@@ -908,7 +932,71 @@ h2 {
   margin: 0 4px;
 }
 
+/* Widgets section */
 
+.sunset-widget:first-child {
+  margin: 5px 0 50px;
+  padding: 0 20px;
+}
+
+.sunset-widget {
+  margin: 30px 0 50px;
+  padding: 0 20px;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+
+    .cat-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .cat-item span {
+      background-color: rgba(125, 125, 121, 0.56);
+      padding: 1px 9px;
+      border-radius: 10px;
+    }
+
+    .recentcomments {
+      margin-bottom: 10px;
+      font-size: 13px;
+
+      span {
+        display: block;
+        border-bottom: 1px solid #3B3B3B;
+        padding-bottom: 2px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+h2.sunset-widget-title {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  background-color: #303030;
+  padding: 8px;
+  border-radius: 20px;
+  line-height: 1em;
+  margin-bottom: 20px;
+  letter-spacing: 0.2px
+}
+
+.tagcloud {
+  a {
+    display: inline-block;
+    background-color: rgba(125, 125, 121, 0.56);
+    padding: 1px 9px;
+    border-radius: 10px;
+
+  }
+}
 
 
 

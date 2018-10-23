@@ -7,8 +7,6 @@
 */
 
 class Sunset_Profile_Widget extends WP_Widget {
-
-  
   function __construct() {
     $args = array(
       'classname'   => 'sunset-profile-widget',
@@ -54,23 +52,18 @@ class Sunset_Profile_Widget extends WP_Widget {
       <a href="<?php echo $google_icon; ?>"><span class="fa fa-google-plus"></span></a>
     <?php endif; ?>
   </div>
+  <hr class="white-hr">
 
 <?php
 
     echo $args['after_widget'];
   }
-
   
   public function form( $instance ) {
     echo "<p><strong>No options for this Widget!</strong><br />";
     echo "You can control the fields of this Widget from <a href='./admin.php?page=sunset-slug'>This Page</a></p>";
   }
-
-  
-  
-
 }
-
 
 // register Foo_Widget widget
 function register_sunset_profile_widget() {
@@ -78,4 +71,33 @@ function register_sunset_profile_widget() {
 }
 add_action( 'widgets_init', 'register_sunset_profile_widget' );
 
-?>
+/*
+==================================
+  Edit Default WordPress widgets
+==================================
+*/
+
+function sunset_tag_cloud_font_change( $args ) {
+  // Equal tag sizes. No matter how many times a tag is used.
+  $args['smallest'] = 8;
+  $args['largest'] = 8;
+
+  return $args;
+}
+
+add_filter( 'widget_tag_cloud_args', 'sunset_tag_cloud_font_change' );
+
+function sunset_list_categories_output_change( $links ) {
+  
+  $links = str_replace('</a> (', '</a> <span>', $links);
+  $links = str_replace(')', '</span>', $links);
+  
+  return $links;
+  
+}
+add_filter( 'wp_list_categories', 'sunset_list_categories_output_change' );
+
+
+
+
+
