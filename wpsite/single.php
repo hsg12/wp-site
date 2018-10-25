@@ -9,6 +9,10 @@
           <?php if ( have_posts() ) : ?>
             
               <?php while ( have_posts() ) : the_post(); ?>
+                
+                <!-- Every time post have been viewed, increase count in database -->
+                <?php sunset_save_post_views( get_the_ID() ) ?>
+
                 <?php get_template_part( 'template-parts/single', get_post_format() ) ?>
 
                 <?php echo sunset_post_navigation(); ?>

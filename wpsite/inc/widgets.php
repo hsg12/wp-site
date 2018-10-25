@@ -43,13 +43,13 @@ class Sunset_Profile_Widget extends WP_Widget {
   <h3 class="sunset-description"><?php echo $userDescription ?></h3>
   <div class="icons-wrapper">
     <?php if ( !empty($twitter_icon) ) : ?>
-      <a href="<?php echo $twitter_icon; ?>"><span class="fa fa-twitter"></span></a>
+      <a href="<?php echo $twitter_icon; ?>" target="_blank"><span class="fa fa-twitter"></span></a>
     <?php endif; ?>
     <?php if ( !empty($facebook_icon) ) : ?>
-      <a href="<?php echo $facebook_icon; ?>"><span class="fa fa-facebook"></span></a>
+      <a href="<?php echo $facebook_icon; ?>" target="_blank"><span class="fa fa-facebook"></span></a>
     <?php endif; ?>
     <?php if ( !empty($google_icon) ) : ?>
-      <a href="<?php echo $google_icon; ?>"><span class="fa fa-google-plus"></span></a>
+      <a href="<?php echo $google_icon; ?>" target="_blank"><span class="fa fa-google-plus"></span></a>
     <?php endif; ?>
   </div>
   <hr class="white-hr">
@@ -97,7 +97,20 @@ function sunset_list_categories_output_change( $links ) {
 }
 add_filter( 'wp_list_categories', 'sunset_list_categories_output_change' );
 
+/*
+====================
+  Save Posts views
+====================
+*/
 
+function sunset_save_post_views( $postID ) {
+  $metaKey = 'sunset_post_views';
+  $views = get_post_meta( $postID, $metaKey, true );
 
+  $count = empty( $views ) ? '0' : $views;
+  $count++;
 
+  update_post_meta( $postID, $metaKey, $count ); // If post meta does not exists, will be created
+}
 
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );

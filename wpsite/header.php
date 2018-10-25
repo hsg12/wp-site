@@ -23,7 +23,7 @@
   
   <body <?php body_class(); ?>>
 
-    <div class="sunset-sidebar"><!-- sidebar-closed -->
+    <div class="sunset-sidebar sidebar-closed">
     
       <div class="sunset-sidebar-container">
 
@@ -37,6 +37,8 @@
 
       </div>
     </div>
+
+    <div class="sidebar-overlay"></div>
 
     <div class="container-fluid p-0">
       <div class="row no-gutters">
