@@ -93,7 +93,7 @@ function sunset_posted_meta() {
   return $output;
 }
 
-function sunset_posted_footer() {
+function sunset_posted_footer( $only_comments = false ) {
   $comments_num = get_comments_number();
 
   if ( comments_open() ) {
@@ -107,11 +107,21 @@ function sunset_posted_footer() {
     }
 
     if ( $comments_num >= 1 ) {
+      if ($only_comments) {
+        // For most popular posts in widgets area
+        $comments = '<span class="sunset-icon sunset-comment mr-1"></span> <a href="' . get_comments_link() . '">' . $comments . '</a>';
+        return $comments;
+      }
       $comments = '<a href="' . get_comments_link() . '">' . $comments . '</a> <span class="sunset-icon sunset-comment"></span>';
     } else {
+      if ($only_comments) {
+        // For most popular posts in widgets area
+        $comments = '<span class="sunset-icon sunset-comment mr-1"></span> <span class="comment-text">' . $comments . '</span>';
+        return $comments;
+      }
       $comments = '<span class="comment-text">' . $comments . '</span><span class="sunset-icon sunset-comment"></span>';
     }
-    
+
   } else {
     $comments = __( 'Comments are closed' );
   }

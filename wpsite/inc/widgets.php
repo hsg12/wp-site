@@ -156,13 +156,26 @@ class Sunset_Popular_Posts_Widget extends WP_Widget {
     }
 
     if ( $posts_query->have_posts() ) {
-      echo "<ul>";
+      
       while ( $posts_query->have_posts() ) {
         $posts_query->the_post();
 
-        echo '<li>' . get_the_title() . '</li>';
+        $post_format = get_post_format() ? get_post_format() : 'standard';
+
+        $res  = '';
+        $res .= '<div class="media text-left mb-2">';
+        $res .= '<div class="media-left">';
+        $res .= '<img src="' . get_template_directory_uri() . '/img/post-' . $post_format . '.png" class="media-object" alt="' . get_the_title() . '"/>';
+        $res .= '</div>';
+        $res .= '<div class="ml-2 media-body">' . get_the_title();
+        $res .= '<div class="media-body-comments">' . sunset_posted_footer( true );
+        $res .= '</div>';
+        $res .= '</div>';
+        $res .= '</div>';
+
+        echo $res;
       }
-      echo "</ul>";
+      
     }
 
     echo $args['after_widget'];

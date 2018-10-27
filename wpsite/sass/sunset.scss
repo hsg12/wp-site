@@ -865,6 +865,7 @@ h2 {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 3;
   display: none;
+  cursor: pointer;
 }
 
 .sunset-sidebar {
@@ -1039,6 +1040,17 @@ h2.sunset-widget-title {
     border-radius: 10px;
 
   }
+}
+
+.media-left img {
+  margin-top: 10px;
+}
+
+.media-body-comments {
+  font-size: 9px;
+  text-transform: uppercase;
+  border-top: 1px solid #3B3B3B;
+  padding: 4px 0;
 }
 
 
