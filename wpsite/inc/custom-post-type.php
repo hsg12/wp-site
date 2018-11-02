@@ -120,12 +120,3 @@ function sunset_save_contact_email_data( $post_id ) {
     $my_data                    // $meta_value
   );
 }
-
-
-
-
-
-
-
-
-

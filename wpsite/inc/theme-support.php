@@ -309,3 +309,20 @@ function wpb_move_comment_field_to_bottom( $fields ) {
 }
  
 add_filter( 'comment_form_fields', 'wpb_move_comment_field_to_bottom' );
+
+/*
+  ====================
+  mailtrap.io settings
+  ====================
+*/
+
+function mailtrap($phpmailer) {
+  $phpmailer->isSMTP();
+  $phpmailer->Host = 'smtp.mailtrap.io';
+  $phpmailer->SMTPAuth = true;
+  $phpmailer->Port = 2525;
+  $phpmailer->Username = 'fd927e1d933593';
+  $phpmailer->Password = '08dd585b335bcb';
+}
+
+add_action('phpmailer_init', 'mailtrap');
