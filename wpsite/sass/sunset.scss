@@ -1055,14 +1055,91 @@ h2.sunset-widget-title {
 
 /* Contact form */
 
+.responsive-map {
+  overflow:hidden;
+  padding-bottom:30.25%;
+  margin-top: 50px;
+  position:relative;
+  height:0;
+}
+.responsive-map iframe {
+  left:0;
+  top:0;
+  height:400px;
+  width:100%;
+  position:absolute;
+}
+
+.sunset-contact-form {
+  padding: 40px 0 0;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+
+  .form-group {
+    margin-bottom: 30px;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      display: block;
+      content: '';
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $grey;
+    }
+
+    .invalid-feedback {
+      text-transform: uppercase;
+      font-size: 9px;
+    }
+  }
+}
+
+.sunset-form-control {
+  resize: vertical;
+  border-radius: 0;
+  border: none;
+  padding: 8px 15px;
+  outline: none;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+
+  &::-webkit-input-placeholder {
+    text-transform: uppercase;
+  }
+
+  &::-moz-placeholder {
+    text-transform: uppercase;
+  }
+
+  &:-ms-input-placeholder {
+    text-transform: uppercase;
+  }
+
+  &:-moz-placeholder {
+    text-transform: uppercase;
+  }
+
+
+  
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+}
+
 .app-form-submition-info {
   display: none;
 }
 
 .app-form-message-box {
   height: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .loader {
@@ -1089,11 +1166,28 @@ h2.sunset-widget-title {
 .app-submission-process {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
 .js-show-feedback {
   display: block;
+}
+
+.btn-sunset-form {
+  background-color: $light-grey;
+  border-radius: 2px;
+  font-size: 26px;
+  color: #fff;
+  padding: 14px 60px;
+  font-weight: 100;
+  border: none;
+  @include animate(all, 320ms);
+
+  &:hover,
+  &:focus {
+    background-color: $dark-grey;
+  }
 }
 
 

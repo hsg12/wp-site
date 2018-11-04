@@ -316,7 +316,7 @@ add_filter( 'comment_form_fields', 'wpb_move_comment_field_to_bottom' );
   ====================
 */
 
-function mailtrap($phpmailer) {
+/*function mailtrap($phpmailer) {
   $phpmailer->isSMTP();
   $phpmailer->Host = 'smtp.mailtrap.io';
   $phpmailer->SMTPAuth = true;
@@ -325,4 +325,4 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = '08dd585b335bcb';
 }
 
-add_action('phpmailer_init', 'mailtrap');
+add_action('phpmailer_init', 'mailtrap');*/
