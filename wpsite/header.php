@@ -60,7 +60,7 @@
                 <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
               </div><!-- table-cell -->
             </div><!-- header-content -->
-            <div class="nav-container">
+            <div class="nav-container d-none d-sm-block">
               <nav class="navbar navbar-expand-lg navbar-sunset">           
                 <?php 
                   wp_nav_menu( array(

@@ -4,13 +4,15 @@
 
   Gallery Post Format
 */
+
+global $detect;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'sunset-format-gallery' ); ?>>
 
   <header class="entry-header text-center">
 
-    <?php if (sunset_get_gallery_attachment()) : $attachments = sunset_get_gallery_attachment(7); ?>
+    <?php if ( sunset_get_gallery_attachment() && !$detect->isMobile() && !$detect->isTablet() ) : $attachments = sunset_get_gallery_attachment(7); ?>
 
       <div id="post-gallery-<?php the_ID(); ?>" class="carousel slide sunset-carousel-thumb" data-ride="carousel">
 
@@ -57,19 +59,24 @@
   </header>
 
   <div class="entry-content">
-    <?php if ( has_post_thumbnail() ) : ?>
-      <?php $featured_image = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() )) ?>
+
+    <?php if ( sunset_get_image_attachment() && ( $detect->isMobile() || $detect->isTablet() ) ) : ?>
+
+      <?php $featured_image = sunset_get_image_attachment( get_post_thumbnail_id( get_the_ID() )) ?>
 
       <a href="<?php the_permalink(); ?>" class="standard-featured-link">
-        <div class="standard-featured" style="background-image: url(<?php echo $featured_image; ?>);"></div>
+        <div class="standard-featured standard-featured-mobile" style="background-image: url(<?php echo $featured_image; ?>);"></div>
       </a>
+
     <?php endif; ?>
+
     <div class="entry-excert text-center">
       <?php the_excerpt(); ?>
     </div>
     <div class="button-container text-center">
       <a href="<?php the_permalink(); ?>" class="btn-sunset"><?php _e( 'Read More' ); ?></a>
     </div>
+
   </div><!-- .entry-content -->
   
   <footer class="entry-footer">

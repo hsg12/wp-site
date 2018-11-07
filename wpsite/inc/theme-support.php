@@ -311,6 +311,19 @@ function wpb_move_comment_field_to_bottom( $fields ) {
 add_filter( 'comment_form_fields', 'wpb_move_comment_field_to_bottom' );
 
 /*
+  ==========================
+  Do Mobile Detect to global
+  ==========================
+*/
+
+  function mobile_detect_global() {
+    global $detect;
+    $detect = new Mobile_Detect;
+  }
+
+  add_action( 'after_setup_theme', 'mobile_detect_global' );
+
+/*
   ====================
   mailtrap.io settings
   ====================
