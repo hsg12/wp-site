@@ -1225,20 +1225,111 @@ h2.sunset-widget-title {
   }
 }
 
+.app-row > div {
+  margin-bottom: 20px;
+
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 0;
+  }
+}
+
+a img.portfolio-img {
+  display: inline-block;
+  border: 5px solid $grey;
+  
+  border-bottom-right-radius: 15px;
+  border-radius:25px;
+  padding: 15px 25px;
+  height: inherit;
+  width: 300px;
+  @include animate(all, 320ms);
+
+  &:hover,
+  &:focus {
+    box-shadow: none;
+  }
+
+  @media only screen and (min-width: 576px) {
+    box-shadow: 35px 35px 7px #bbb;
+  }
+}
+
+/* Bootstrap 4 custom tooltip styles */
+
+.tooltip-inner {
+  background-color: #888;
+}
+.tooltip.bs-tooltip-right .arrow:before {
+    border-right-color: #888 !important;
+}
+.tooltip.bs-tooltip-left .arrow:before {
+    border-left-color: #888 !important;
+}
+.tooltip.bs-tooltip-bottom .arrow:before {
+    border-bottom-color: #888 !important;
+}
+.tooltip.bs-tooltip-top .arrow:before {
+    border-top-color: #888 !important;
+}
+
 /* Footer section */
 
 .sunset-footer {
   background-color: #333;
   height: 100px;
-  display: flex;
   color: #fff;
 
   position: absolute;
   bottom: 0;
   width: 100%;
 
-  div {
-    margin: auto;
+  display: flex;
+  align-items: center;
+
+  @media only screen and (min-width: 900px) {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-outer {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+
+    @media only screen and (min-width: 900px) {
+      flex-direction: row;
+      display: flex;
+      align-items: center;
+    }
+
+    a {
+      color: #aaa !important;
+      padding: .5rem;
+
+      &:hover,
+      &:focus {
+        color: #fff !important;
+      }
+    }
+  }
+
+  .footer-menu {
+    ul {
+      margin-bottom: 0;
+    }
+
+    li {
+      display: inline-block;
+    }
+  }
+
+  .footer-logo {
+    margin-left: 0;
+    text-align: center;
+    
+    @media only screen and (min-width: 900px) {
+      margin-left: auto;
+    }
   }
 }
 

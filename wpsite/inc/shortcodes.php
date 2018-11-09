@@ -68,3 +68,26 @@ function sunset_contact_form( $atts, $content = null ) {
 }
 
 add_shortcode( 'contact_form', 'sunset_contact_form' );
+
+function app_row($atts, $content) {
+    return '<div class="row app-row">' . do_shortcode($content) . '</div>';
+}
+add_shortcode( 'row', 'app_row' );
+
+function app_column($atts, $content) {
+    extract(shortcode_atts(array(
+        'class' => ''
+    ), $atts));
+    
+    return '<div class="' . $class . '">'. do_shortcode($content) .'</div>';
+}
+add_shortcode( 'column', 'app_column' );
+
+function app_icon($atts) {
+    extract(shortcode_atts(array(
+        'class' => ''
+    ), $atts));
+    
+    return '<i class="fa ' . $class . '"></i>';
+}
+add_shortcode( 'icon', 'app_icon' );

@@ -4,10 +4,29 @@
   @package wp-site
 */
 ?>
-  <footer class="sunset-footer text-center">
-    <div>This is the footer</div>
+  <footer class="sunset-footer">
+    <div class="container">
+      <div class="footer-outer">
+        <div class="footer-menu">
+          <?php 
+            wp_nav_menu( array(
+              'theme_location'  => 'primary',
+              'container'       => false,
+              'container_class' => false,
+              'menu_class'      => 'list-unstyled',
+              'walker'          => new Bootstrap_NavWalker,
+            ) ); 
+          ?>
+        </div>
+        <div class="footer-logo"> 
+          <a href="<?php bloginfo( 'url' )?>">
+            <span class="sunset-logo sunset-icon"></span>
+            <?php bloginfo( 'name' )?>
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
-  
 
   <a id="back-to-top" 
      href="#" 
