@@ -334,8 +334,8 @@ add_filter( 'comment_form_fields', 'wpb_move_comment_field_to_bottom' );
   $phpmailer->Host = 'smtp.mailtrap.io';
   $phpmailer->SMTPAuth = true;
   $phpmailer->Port = 2525;
-  $phpmailer->Username = 'fd927e1d933593';
-  $phpmailer->Password = '08dd585b335bcb';
+  $phpmailer->Username = 'not_for_your_eyes';
+  $phpmailer->Password = 'not_for_your_eyes';
 }
 
 add_action('phpmailer_init', 'mailtrap');*/
